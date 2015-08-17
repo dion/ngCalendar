@@ -4,13 +4,13 @@
 <title>Calendar Directive Challenge</title>
 <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
-<body ng-controller="CalendarCtrl" ng-init="data.currentMonth = 'August';data.currentYear = 2015">
+<body ng-controller="CalendarCtrl">
 
 <!-- your code for nav and calendar directive instance here -->
 	<ul class="menu">
 		<li>
 			<select ng-model="data.currentMonth" ng-change="getRange()">
-				<option ng-repeat="month in months" value="{{month}}" ng-bind="month" ng-selected="month == 'August'"></option>
+				<option ng-repeat="month in months" value="{{$index}}" ng-bind="month" ng-selected="month == 'August'"></option>
 			</select>
 		</li>
 		<li>
@@ -21,7 +21,7 @@
 	</ul>
 	<table>
 		<tr>
-			<td ng-repeat="item in range.days" class="item">
+			<td ng-repeat="item in range.days" class="item" ng-class="{grey: isNotCurrentMonth(item.date)}">
 				<span ng-bind="item.day"></span>
 			</td>
 		</tr>

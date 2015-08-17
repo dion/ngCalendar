@@ -1,6 +1,11 @@
 //var d = new Date(); d.setMonth('March'); d.setYear('1995');
 angular.module('calendarDemoApp', [])
-
+	.run(['$rootScope', function (scope) {
+		scope.data = {
+			currentMonth: '7',
+			currentYear: '2015'
+		};
+	}])
 	.controller('CalendarCtrl', function ($scope) {
 		var i = 0,
 		    startYear = 2035,
@@ -10,7 +15,7 @@ angular.module('calendarDemoApp', [])
 			years = [];
 
 		$scope.data = {
-			currentMonth: 'August',
+			currentMonth: '7',
 			currentYear: '2015'
 		};
 
@@ -28,13 +33,21 @@ angular.module('calendarDemoApp', [])
 		};
 
 		$scope.getCurrentMonth = function () {
-			var date = new Date();
-			
-			months[date.getMonth()];
+			return $scope.data.currentMonth;
 		};
 
 		$scope.getCurrentYear = function () { 
 			$scope.getDate.getFullYear();
+		};
+
+		$scope.isNotCurrentMonth = function (date) {
+			console.log(date.getMonth(), $scope.getCurrentMonth());
+			
+			if (date.getMonth() == $scope.getCurrentMonth()) {
+				return false;	
+			}
+
+			return true;
 		};
 
 		$scope.getRange = function (month, year) {
