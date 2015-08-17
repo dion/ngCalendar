@@ -6,6 +6,13 @@ angular.module('calendarDemoApp', [])
 			currentYear: '2015'
 		};
 	}])
+	.directive('calendar', function () {
+		return {
+			restrict: 'E',
+			templateUrl: 'calendar.html',
+			controller: 'CalendarCtrl'
+		}
+	})
 	.controller('CalendarCtrl', function ($scope) {
 		var i = 0,
 		    startYear = 2035,
@@ -41,7 +48,7 @@ angular.module('calendarDemoApp', [])
 		};
 
 		$scope.isNotCurrentMonth = function (date) {
-			console.log(date.getMonth(), $scope.getCurrentMonth());
+			//console.log(date.getMonth(), $scope.getCurrentMonth());
 			
 			if (date.getMonth() == $scope.getCurrentMonth()) {
 				return false;	
@@ -51,11 +58,11 @@ angular.module('calendarDemoApp', [])
 		};
 
 		$scope.getRange = function (month, year) {
-			console.log($scope.data);
+			//console.log($scope.data);
 
 			$scope.range = CalendarRange.getMonthlyRange($scope.getDate());
 
-			console.log($scope.range);
+			//console.log($scope.range);
 		};
 
 		$scope.months = months;

@@ -4,29 +4,9 @@
 <title>Calendar Directive Challenge</title>
 <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
-<body ng-controller="CalendarCtrl">
+<body>
 
-<!-- your code for nav and calendar directive instance here -->
-	<ul class="menu">
-		<li>
-			<select ng-model="data.currentMonth" ng-change="getRange()">
-				<option ng-repeat="month in months" value="{{$index}}" ng-bind="month" ng-selected="month == 'August'"></option>
-			</select>
-		</li>
-		<li>
-			<select ng-model="data.currentYear" ng-change="getRange()">
-				<option ng-repeat="year in years" value="{{year}}" ng-bind="year" ng-selected="year == 2015"></option>
-			</select>
-		</li>
-	</ul>
-	<table>
-		<tr>
-			<td ng-repeat="item in range.days" class="item" ng-class="{grey: isNotCurrentMonth(item.date)}">
-				<span ng-bind="item.day"></span>
-			</td>
-		</tr>
-	</table>
-
+	<calendar></calendar>
 
 <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="./utilities/calendar-range/calendarRange.js"></script>
