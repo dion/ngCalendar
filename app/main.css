@@ -1,0 +1,19 @@
+.menu {
+	display:block;
+	float:left;
+	list-style-type:none;
+	clear:both;
+}
+.menu li {
+	float:left;
+}
+table {
+	display:block;
+	float:left;
+}
+.item {
+	display:inline-block;
+	width:150px;
+	height:150px;
+	border:1px solid #808080;
+}
