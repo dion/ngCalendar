@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jasmine-expect": "^2.0.0-beta1",
     "karma": "^0.12.17",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5"

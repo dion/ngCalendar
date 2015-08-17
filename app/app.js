@@ -22,7 +22,7 @@ angular.module('calendarDemoApp', [])
 			years = [];
 
 		$scope.data = {
-			currentMonth: '7',
+			currentMonth: 7,
 			currentYear: '2015'
 		};
 
