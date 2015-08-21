@@ -1,18 +1,18 @@
 <ul class="menu">
 	<li>
-		<select ng-model="data.currentMonth" ng-change="getRange()">
-			<option ng-repeat="month in months" value="{{$index}}" ng-bind="month" ng-selected="month == 'August'"></option>
+		<select ng-model="currentMonth" ng-change="getRange()">
+			<option ng-repeat="month in months" ng-value="$index" ng-bind="month" ng-selected="$index == currentMonth"></option>
 		</select>
 	</li>
 	<li>
-		<select ng-model="data.currentYear" ng-change="getRange()">
-			<option ng-repeat="year in years" value="{{year}}" ng-bind="year" ng-selected="year == 2015"></option>
+		<select ng-model="currentYear" ng-change="getRange()">
+			<option ng-repeat="year in years" ng-value="year" ng-bind="year" ng-selected="year == currentYear"></option>
 		</select>
 	</li>
 </ul>
 <table>
 	<tr>
-		<td ng-repeat="item in range.days" class="item" ng-class="{grey: isNotCurrentMonth(item.date)}">
+		<td ng-repeat="item in range.days" class="item" ng-class="{grey: isNotCurrentMonth(item.date, $index)}">
 			<span ng-bind="item.day"></span>
 		</td>
 	</tr>

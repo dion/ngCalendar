@@ -1,19 +1,39 @@
 //var d = new Date(); d.setMonth('March'); d.setYear('1995');
 angular.module('calendarDemoApp', [])
-	.run(['$rootScope', function (scope) {
+	/*.run(['$rootScope', function (scope) {
 		scope.data = {
 			currentMonth: '7',
 			currentYear: '2015'
 		};
-	}])
+	}])*/
 	.directive('calendar', function () {
 		return {
 			restrict: 'E',
 			templateUrl: 'calendar.html',
-			controller: 'CalendarCtrl'
+			controller: 'CalendarCtrl',
+			scope: {
+				currentMonth: '=',
+				currentYear: '='
+			}
 		}
 	})
-	.controller('CalendarCtrl', function ($scope) {
+	.factory('Calendar', function () {
+
+		var cal = {};
+
+		cal.getDate = function (month, year) {
+			var date = new Date();
+
+			date.setMonth(month);
+			date.setYear(year);
+
+			//console.log(month, year);
+			return date;
+		};
+
+		return cal;
+	})
+	.controller('CalendarCtrl', function ($scope, Calendar) {
 		var i = 0,
 		    startYear = 2035,
 			months = ['January', 'February', 'March', 'April',
@@ -21,47 +41,39 @@ angular.module('calendarDemoApp', [])
 					 'October', 'November', 'December'],
 			years = [];
 
-		$scope.data = {
-			currentMonth: 7,
-			currentYear: '2015'
-		};
+		$scope.currentMonth = $scope.currentMonth || new Date().getMonth();
+		$scope.currentYear = $scope.currentYear || new Date().getFullYear();	
 
 		while (i <= 40) {
 			years.push(startYear--);
 			i++;
 		}
 
-		$scope.getDate = function () {
-			var date = new Date();
-
-			date.setMonth($scope.data.currentMonth);
-			date.setYear($scope.data.currentYear);
-			return date;
-		};
+		$scope.getDate = Calendar.getDate;
 
 		$scope.getCurrentMonth = function () {
-			return $scope.data.currentMonth;
+			return $scope.currentMonth;
 		};
 
 		$scope.getCurrentYear = function () { 
-			$scope.getDate.getFullYear();
+			$scope.getDate($scope.currentMonth, $scope.currentYear).getFullYear();
 		};
 
-		$scope.isNotCurrentMonth = function (date) {
-			//console.log(date.getMonth(), $scope.getCurrentMonth());
-			
-			if (date.getMonth() == $scope.getCurrentMonth()) {
-				return false;	
-			}
+		$scope.isNotCurrentMonth = function (date, idx) {
+			if (idx > 10 && idx < 25) {
+				return false;
+			} else {
+				console.log('test');
+				if (date.getMonth() == $scope.getCurrentMonth()) {
+					return false;
+				}
 
-			return true;
+				return true;
+			}
 		};
 
 		$scope.getRange = function (month, year) {
-			//console.log($scope.data);
-
-			$scope.range = CalendarRange.getMonthlyRange($scope.getDate());
-
+			$scope.range = CalendarRange.getMonthlyRange($scope.getDate($scope.currentMonth, $scope.currentYear));
 			//console.log($scope.range);
 		};
 

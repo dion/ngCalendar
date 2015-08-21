@@ -4,9 +4,10 @@
 <title>Calendar Directive Challenge</title>
 <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
-<body>
-
-	<calendar></calendar>
+<body ang-init="month=7;year='2015'">
+	<input type="text" ng-model="month">
+	<input type="text" ng-model="year">
+	<calendar acurrent-month="month" acurrent-year="year"></calendar>
 
 <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="./utilities/calendar-range/calendarRange.js"></script>
